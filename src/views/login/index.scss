@@ -1,0 +1,79 @@
+@import '../../static/css/_mixins.scss';
+
+.login-container{
+
+    .input-user-div, .input-pw-div{
+        width: 100%;
+        height: calc-rem(100);
+        background: #fff;
+        border-bottom: calc-rem(1) solid #eeeeee;
+        padding: 0 calc-rem(40);
+
+        input{
+            border: 0;
+            height: 100%;
+            width: 100% - calc-rem(32);
+            padding: 0 calc-rem(24);
+            vertical-align: top;
+            font-size: calc-rem(28);
+            color: #999;
+        }
+    }
+
+    .input-user-div{
+        margin-top: calc-rem(20);
+        .icon{
+            width: calc-rem(32);
+            height: 100%;
+            background: url(../../static/images/phone.png) no-repeat center;
+            background-size: calc-rem(32);
+            display: inline-block;
+        }
+    }
+
+    .input-pw-div{
+        .icon{
+            width: calc-rem(32);
+            height: 100%;
+            background: url(../../static/images/password.png) no-repeat center;
+            background-size: calc-rem(32);
+            display: inline-block;
+        }
+    }
+
+    .btn-div{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+
+        button{
+            width: 100%;
+            height: calc-rem(100);
+            line-height: calc-rem(100);
+            border-radius: calc-rem(4);
+        }
+
+        button:nth-child(1){
+            background: #fe5a08;
+            color: #fff;
+            font-size: calc-rem(32);
+            font-family: "PingFang-SC-Medium";
+        }
+
+        button:nth-child(2){
+            color: #5b5b5b;
+            background: #fff;
+            
+            .icon-wx{
+                width: calc-rem(32);
+                height: 100%;
+                background: url(../../static/images/weixin.png) no-repeat center;
+                background-size: calc-rem(32);
+                display: inline-block;
+                margin-right: calc-rem(10);
+                vertical-align: middle;
+            }
+        }
+    }
+}

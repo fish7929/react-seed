@@ -1,0 +1,76 @@
+/**
+ * @component _variables.scss
+ * @description 全局的样式变了。
+ * @time 2017-03-27 11:00
+ * @author fishYu
+ **/
+$baseSize: 14; /*默认字体*/
+$ratio: 2; /*缩放比*/
+$factor: 320/375;  /*屏幕和设计稿的比例（750尺寸）*/
+$headerHeight: 86;  /*顶部的高度*/
+// $topHeight: 126;  /*有头部的高度*/
+$topHeight: 0;
+$lighter: 300;  /***表示font-weight*/
+$normal: 400;  /***表示font-weight*/
+$bold: 700;  /***表示font-weight*/
+
+$greyColor: #f6f6f6;  /*全局背景色*/
+$yellowColor: #FFCA00;  /*黄色*/
+$textColor: #909090; /*全局文字色*/
+$hintColor: #b4b4b4;   /*提示文字颜色*/
+$labelColor: #535A6B; /*提示标签颜色*/
+$btnColor: #FDDC60;  /*按钮没点击的颜色*/
+$whiteColor: #fff;  /*白色*/
+$blackColor: #000;  /*白色*/
+$tipColor: #6997f5;  /*协议链接提示颜色*/
+$opacityColor: rgba(20,20,20,.48);  /**带透明度颜色*/
+
+$bankColor: #FF4C18;  /**银行提示颜色**/
+$phoneColor: #b8c9cf;  /**电话颜色*/
+$borderRadius: 13; /*全局圆角大小*/
+/**各种图片资源***/
+$notFoundIcon : '../../assets/images/not-found.png'; /*打烊图片*/
+$nextIcon: '../../assets/images/next.png';
+$backIcon: '../../assets/images/back.png';
+$infoIcon: '../../assets/images/info.png';
+$uncheckIcon: '../../assets/images/uncheck.png';
+$checkIcon: '../../assets/images/check.png';
+$volumeIcon: '../../assets/images/volume.png';
+$aboutIcon: '../../assets/images/about.png';
+$contactIcon: '../../assets/images/contact.png';
+
+$cashIcon: '../../assets/images/cash.png';
+$cashSelectedIcon: '../../assets/images/cash-selected.png';
+$mineIcon: '../../assets/images/mine.png';
+$mineSelectedIcon: '../../assets/images/mine-selected.png';
+$repaymentIcon: '../../assets/images/repayment.png';
+
+$userIcon: '../../assets/images/user.png';
+$versionIcon: '../../assets/images/version.png';
+
+$plusIcon: '../../assets/images/plus.png';  /*加号*/
+$minusIcon: '../../assets/images/minus.png';  /*减号*/
+$plusDisabledIcon: '../../assets/images/plus-disabled.png';  /*加号*/
+$minusDisabledIcon: '../../assets/images/minus-disabled.png';  /*减号*/
+
+$timeIcon: '../../assets/images/time.png';
+$bankIcon: '../../assets/images/bank.png';
+
+$closeIcon: '../../assets/images/close.png';
+$delIcon: '../../../assets/images/delete.png';  /*直接导入的时候路径需要再次添加一级*/
+$close1Icon: '../../../assets/images/close1.png';  /*直接导入的时候路径需要再次添加一级*/
+$commonBorder: 1px solid $greyColor;
+
+$activeFgColor: #8f2405;
+$activeBgColor:#ffda00;
+$borderColor: #c2c2c2;
+$ignoreColor: #f0f0f0;
+$lessImportantColor: #b5b5b5;
+$errorColor: #e62418;
+$highlightColor: #ff994d;
+$placeholderColor: #ebebeb;
+$redColor: #fd0500;
+$activeFgColorDarker: #6e2406;
+$activeBgColorDarker: #ebc900;
+$helpColor: #c0c0c0;
+

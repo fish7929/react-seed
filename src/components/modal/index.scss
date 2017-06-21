@@ -1,0 +1,151 @@
+/** 
+ * @component index.scss
+ * @description 全局模态对话框的样式
+ * @time 2017-6-21 12:30
+ * @author fishYu
+ */
+
+ /**全屏对话框样式*/
+ .screen-dialog-container{
+     position: absolute;
+     z-index: 99999;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     background: $opacityColor;
+ }
+
+ .screen-dialog-content{
+     width: calc-rem(580);
+     height: calc-rem(420);
+     background: $whiteColor;
+     border-radius: calc-rem(10);
+     padding-top: calc-rem(48);
+ }
+ .screen-dialog-title{
+    width: 100%;
+    text-align: center;
+    color: $labelColor;
+    font-size: calc-rem(34);
+ }
+ .screen-dialog-message{
+    width: 100%;
+    text-align: center;
+    color: $textColor;
+    font-size:calc-rem(32);
+    padding: 0 calc-rem(40);
+    margin-top: calc-rem(56);
+ }
+ .screen-dialog-button{
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     height: calc-rem(102);
+     text-align: center;
+     line-height: calc-rem(102);
+     font-size: calc-rem(36);
+     color: #ffb100;
+     border-top: $commonBorder;
+ }
+
+ .screen-dialog-button span{
+     display: inline-block;
+     width: 50%;
+     height: 100%;
+     text-align: center;
+ }
+ .screen-dialog-button span:first-child{
+     border-right: $commonBorder;
+ }
+ /**toast对话框样式*/
+ @mixin common-toast{
+     background: $opacityColor;
+     padding: calc-rem(45);
+     border-radius: calc-rem($borderRadius);
+     font-size: calc-rem(34);
+    //  height: calc-rem(186);
+     color: $whiteColor;
+     line-height: calc-rem(48);
+     text-align: center;
+     white-space: nowrap;
+ }
+ .toast-dialog-mask{
+    position: fixed;
+    z-index: 99900;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+ }
+ .toast-dialog-message{
+     position: relative;
+     width: 100%;
+     height: 100%;
+ }
+ .toast-dialog-container-top{
+     top: 27%;
+     @include common-toast;
+ }
+ .toast-dialog-container-center{
+     @include common-toast;
+     z-index: 1000;
+ }
+ .toast-dialog-container-bottom{
+     bottom: calc-rem(40);
+     @include common-toast;
+ }
+ .toast-dialog-image{
+     width: 100%;
+     height: calc-rem(100);
+     margin-bottom: calc-rem(30);
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: contain;
+ }
+
+ /***短信验证码的消息提示框***/
+.verify-dialog-container{
+    z-index: 999;
+}
+
+.verify-phone-wrapper{
+    text-align: left;
+    width: 100%;
+    height: calc-rem(50);
+    background: $whiteColor;
+    color: $labelColor;
+    font-size: calc-rem(26);
+    line-height: calc-rem(50);
+    padding-left: calc-rem(120);
+    margin-top: calc-rem(46);
+}
+.verify-phone-wrapper:before{
+    position: absolute;
+    left: calc-rem(40);
+    color: $labelColor;
+    content: attr(data-hint);
+    font-size: calc-rem(30);
+}
+.common-input.verify-dialog-code{
+    padding: 0;
+    text-align: left;
+}
+.common-input.verify-dialog-code input{
+    width: 43%;
+    border: 0;
+    font-size: calc-rem(26);
+    margin-left: calc-rem(34);
+}
+
+/*******验证码组件的通用样式*********/
+
+
+.verify-code{
+    color: $tipColor;
+    font-size: calc-rem(28);
+}
+
+
+
+
