@@ -52,6 +52,4 @@ render(<Provider store={store}>
             <Routers history={history}></Routers>
         </div>
     </Provider>, document.getElementById("app"));
-//渲染全局的对话框
-render(<AppModal />, document.getElementById("app-modal"));
 

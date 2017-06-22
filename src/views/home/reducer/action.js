@@ -26,12 +26,12 @@ function receiveData(result, category) {
     switch(category) {
         case ZERO:
             return {
-                type: ActionType.RECEIVE_HOME_LIST_DATA,
+                type: ActionType.RECEIVE_HOME_TAGS_DATA,
                 data: result
             }
         case FIRST:
             return {
-                type: ActionType.RECEIVE_HOME_TAGS_DATA,
+                type: ActionType.RECEIVE_HOME_LIST_DATA,
                 data: result
             }
     }
@@ -42,8 +42,8 @@ function receiveData(result, category) {
  */
 export const fetchData = (category, param = null) => dispatch => {
     dispatch(requestData());
-    let _url = category == ZERO ? APIPath.GetHomeListData : APIPath.GetHomeTagsData;
-    dispatch(WebAPIUtils.fetchRemoteData(_url, param, "GET")).then(data => {
+    let _url = category == ZERO ? APIPath.GetHomeTagsData : APIPath.GetHomeListData;
+    dispatch(WebAPIUtils.sendRequest(_url, param, "GET")).then(data => {
         dispatch(receiveData(data, category));
     })
 }

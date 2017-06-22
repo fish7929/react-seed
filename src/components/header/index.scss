@@ -8,7 +8,7 @@
 .app-header{
     width: 100%;
     background-color: $yellowColor;
-    padding-top: calc-rem(40);  /*顶部时间栏的高度*/
+    padding-top: calc-rem($timebarHeight);  /*顶部时间栏的高度*/
     div{
         width: 100%;
         height: calc-rem($headerHeight);

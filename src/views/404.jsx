@@ -11,7 +11,7 @@
 import React from 'react';
 
 //require submodule
-import Page from '../components/ui/Page';
+import Page from '../components/page';
 // import Header from '../components/ui/Header';
 
 class NoFoundPage extends React.Component {

@@ -1,19 +1,22 @@
-import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { Link, hashHistory } from 'react-router'
+/** 
+ * @component index.js
+ * @description 登录界面
+ * @time 2017-6-21 17:30
+ * @author fishYu
+ */
 
-import Page from '../../component/page'
-import Header from '../../component/header'
+'use strict';
 
+import React, { PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import * as RouterConst from '../../static/const/routerConst'
-import ErrorMessage from '../../static/const/errorMessage'
+import Page from '../../components/page';
+import Header from '../../components/header';
 
-import { userLogin } from './reducer/action'
-import { checkNumber, checkPhone } from '../../utils'
+import { userLogin } from './reducer/action';
 
-import './index.scss'
+import './index.scss';
 
 class Login extends React.Component{
 
@@ -35,7 +38,7 @@ class Login extends React.Component{
 
     onPhoneChange(e){
         let value = e.currentTarget.value.replace(/\s/g,'')
-        if(checkNumber(value)){
+        if(Base.checkNumber(value)){
             this.setState({username: value})
         }
     }
@@ -51,7 +54,7 @@ class Login extends React.Component{
         let { username, password } = this.state, msg=""
         if(username == ""){
             msg = ErrorMessage.Error_Phone_Empty
-        }else if(!checkPhone(username)){
+        }else if(!Base.checkPhone(username)){
             msg = ErrorMessage.Error_Phone_Invalid
         }else if(password == ""){
             msg = ErrorMessage.Error_Password_Empty
@@ -68,8 +71,8 @@ class Login extends React.Component{
     render(){
         let { username, password } = this.state
         return(
-            <Page className="login-container">
-                <Header title="登陆" isShowBack={false} />
+            <Page id='login-container-page'>
+                <Header title="登陆" isShowBack={true} />
 
                 <div className="input-user-div">
                     <span className="icon"></span>
@@ -94,7 +97,7 @@ Login.PropTypes = {
 }
 
 let mapStateToProps = state => ({
-    isLogin: state.loginReducer.isLogin
+    isLogin: state.loginData.isLogin
 })
 
 let mapDispatchToProps = (dispatch) => {

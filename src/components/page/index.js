@@ -7,7 +7,7 @@
 
 import React from 'react';
 import './index.scss';
-const Page = React.createClass({
+class Page extends React.Component{
     render(){
         return (
             <div className={'ui-view-transitioning lt-ui-page'} id={this.props.id}>
@@ -15,6 +15,6 @@ const Page = React.createClass({
             </div>
         );
     }
-});
+};
 
 export default Page;

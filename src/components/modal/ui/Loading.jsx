@@ -16,7 +16,7 @@ class Loading extends React.Component {
     }
     render() {
         return (
-            <div className="loading-modal">
+            <div className="app-modal">
                 <button className="btn-loading xy-center">
                     <span className="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
                 </button>

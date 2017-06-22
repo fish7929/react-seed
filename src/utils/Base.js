@@ -15,14 +15,14 @@ module.exports = {
      * @param {判断的对象} obj 
      * @returns {boolean}
      */
-    isFunction  (obj) {
+    isFunction(obj) {
         return typeof obj == 'function' || false;
     },
     /**
      * 判断浏览器平台
      * @returns {string}
      */
-    judgePlatform () {
+    judgePlatform() {
         var platform = "pc";
         //来源判断
         if (navigator.userAgent.match(/Android/i)) {
@@ -42,7 +42,7 @@ module.exports = {
      * 判断是否在微信内部
      * @returns {boolean}
      */
-    isWeiXinPlatform  () {
+    isWeiXinPlatform() {
         var userAgent = navigator.userAgent.toLowerCase();
         var res = false;
         //来源判断
@@ -58,19 +58,19 @@ module.exports = {
     setTitle(title) {
         //动态设置标题
         document.title = title;
-        if(this.isWeiXinPlatform()){
+        if (this.isWeiXinPlatform()) {
             const iframe = document.createElement('iframe');
             // iframe.src = "./favicon.ico";
             iframe.style.display = "none";
             iframe.addEventListener("load", handler, false);
-            function handler (){
+            function handler() {
                 setTimeout(function () {
                     iframe.removeEventListener('load', handler, false);
                     document.body.removeChild(iframe);
                 }.bind(this), 0)
             }
             document.body.appendChild(iframe);
-            window.addEventListener('hashchange', function(){
+            window.addEventListener('hashchange', function () {
                 window.location.reload();
             }, false);
         }
@@ -81,21 +81,21 @@ module.exports = {
      * @returns {string}
      */
     formatMoney(amount) {
-        if(!amount){
+        if (!amount) {
             amount = 0;
         }
         var amountTxt = amount + "";
-        if(parseInt(amount)==amount){
+        if (parseInt(amount) == amount) {
             amountTxt = amount + ".00"
-        }else{
+        } else {
             var len = amount.toString().split(".")[1].length
-            if(len <= 1){
-                amountTxt = amountTxt+"0";
-            }else{
+            if (len <= 1) {
+                amountTxt = amountTxt + "0";
+            } else {
                 //保留两位小数amount 转换下先，预防不是number类型
-                try{
+                try {
                     amountTxt = Number(amount).toFixed(2);
-                }catch(e){
+                } catch (e) {
 
                 }
             }
@@ -111,10 +111,10 @@ module.exports = {
     formatName(name) {
         name = name + '';
         var len = name.length;
-        if(len >= 3){
+        if (len >= 3) {
             var reg = /^(.).+(.)$/g;    //三字以上名称的生活
             name = name.replace(reg, '$1*$2');
-        }else{
+        } else {
             var reg = /^(.).$/g;  //两位名称的生活
             name = name.replace(reg, '$1*');
         }
@@ -144,40 +144,40 @@ module.exports = {
 	*把特殊符号%,替换"s百分号b"掉后，编码字符串，
 	*@parms : str	需要编码的字符串
 	*/
-	myEncodeURIComponent(str){
-		var reStr = str;
-		if(str.indexOf("%") > -1){
-			reStr = str.replace(/\%/g, "s百分号b");
-		}
+    myEncodeURIComponent(str) {
+        var reStr = str;
+        if (str.indexOf("%") > -1) {
+            reStr = str.replace(/\%/g, "s百分号b");
+        }
         try {
-		    return encodeURIComponent(reStr);
-        }catch(e){
+            return encodeURIComponent(reStr);
+        } catch (e) {
             return reStr;
         }
-	},
+    },
 	/*
 	*解码字符串后，把"s百分号b"替换成%
 	*@parms : str	需要解码的字符串
 	*/
-	myDecodeURIComponent(str){
+    myDecodeURIComponent(str) {
         var reStr = str;
         try {
             reStr = decodeURIComponent(str);
-        }catch(e){
+        } catch (e) {
         }
-		if(reStr.indexOf("s百分号b") > -1){
-			reStr = reStr.replace(/s百分号b/g, "%");
-		}
-		return reStr;
-	},
+        if (reStr.indexOf("s百分号b") > -1) {
+            reStr = reStr.replace(/s百分号b/g, "%");
+        }
+        return reStr;
+    },
     /**
      * 根据localStorage属性 获取 存储的JSON对象
      * @param {localStorage属性} prototype 
      */
-    getLocalStorageObject(prototype){
+    getLocalStorageObject(prototype) {
         var str = window.localStorage.getItem(prototype);
         var result = {};
-        if(str && str!=""){
+        if (str && str != "") {
             result = JSON.parse(str);
         }
         return result;
@@ -187,7 +187,7 @@ module.exports = {
      * @param {localStorage属性} prototype 
      * @param {需要保存的对象值} obj 
      */
-    setLocalStorageObject(prototype, obj){
+    setLocalStorageObject(prototype, obj) {
         var str = JSON.stringify(obj);
         window.localStorage.setItem(prototype, str);
     },
@@ -196,9 +196,9 @@ module.exports = {
      * @param {localStorage属性} prototype 
      * @param {需要获取对象的键值} key 
      */
-    getLocalStorageValue(prototype, key){
+    getLocalStorageValue(prototype, key) {
         var obj = utils.getLocalStorageObject(prototype);
-        if(obj[key]){
+        if (obj[key]) {
             return obj[key];
         }
         return null;
@@ -209,7 +209,7 @@ module.exports = {
      * @param {需要保存对象的键值} key 
      * @param {需要保存对象的值} value 
      */
-    addLocalStorageObject(prototype, key, value){
+    addLocalStorageObject(prototype, key, value) {
         var obj = utils.getLocalStorageObject(prototype);
         obj[key] = value;
         utils.setLocalStorageObject(prototype, obj);
@@ -219,9 +219,9 @@ module.exports = {
      * @param {localStorage属性} prototype 
      * @param {需要保存对象的键值} key 
      */
-    delLocalStorageObject(prototype, key){
+    delLocalStorageObject(prototype, key) {
         var obj = utils.getLocalStorageObject(prototype);
-        if(obj[key]){
+        if (obj[key]) {
             delete obj[key];
         }
         utils.setLocalStorageObject(prototype, obj);
@@ -241,17 +241,17 @@ module.exports = {
      * @param {object} obj  判断的对象
      */
     isJsonObject(obj) {
-        var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length; 
+        var isjson = typeof (obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;
         return isjson;
     },
     /**
      * 判断字符串是否为json string
      * @param {string} str 
      */
-    isJsonString(str){
-        if(!str){
+    isJsonString(str) {
+        if (!str) {
             return false;
-        }else if(str.indexOf("{") == 0 && str.lastIndexOf("}") == str.length - 1){
+        } else if (str.indexOf("{") == 0 && str.lastIndexOf("}") == str.length - 1) {
             return true;
         }
         return false;
@@ -262,12 +262,24 @@ module.exports = {
      */
     size(obj) {
         let num = 0;
-        if(Base.isJsonObject(obj)){
+        if (Base.isJsonObject(obj)) {
             var arr = Object.keys(obj);
             num = arr.length;
-        }else{
+        } else {
             num = obj.length || 0;
         }
         return num;
+    },
+    checkNumber(number) {
+        let reg = /^[0-9]*$/;
+        if (!reg.test(number)) return false
+        return true
+    },
+    
+    checkPhon(txt) {
+        let reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if (!reg.test(txt)) return false
+
+        return true
     }
 };

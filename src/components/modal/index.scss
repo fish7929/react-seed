@@ -4,18 +4,21 @@
  * @time 2017-6-21 12:30
  * @author fishYu
  */
-
- /**全屏对话框样式*/
- .screen-dialog-container{
-     position: absolute;
-     z-index: 99999;
-     width: 100%;
-     height: 100%;
-     top: 0;
-     left: 0;
-     background: $opacityColor;
+@import "../../styles/common/_mixins.scss";
+ /**模态样式*/
+ .app-modal{
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+/*对话框的样式***/
+.dialog-mask-bg{
+   background-color: $opacityColor !important; 
  }
-
  .screen-dialog-content{
      width: calc-rem(580);
      height: calc-rem(420);
@@ -35,7 +38,11 @@
     color: $textColor;
     font-size:calc-rem(32);
     padding: 0 calc-rem(40);
-    margin-top: calc-rem(56);
+    line-height: calc-rem(40);
+    margin-top: calc-rem(85);
+ }
+ .dialog-message-no-title{
+   margin-top: calc-rem(120) !important;
  }
  .screen-dialog-button{
      position: absolute;
@@ -59,6 +66,9 @@
      border-right: $commonBorder;
  }
  /**toast对话框样式*/
+ .toast-mask-bg{
+   background-color: transparent !important; 
+ }
  @mixin common-toast{
      background: $opacityColor;
      padding: calc-rem(45);
@@ -69,14 +79,6 @@
      line-height: calc-rem(48);
      text-align: center;
      white-space: nowrap;
- }
- .toast-dialog-mask{
-    position: fixed;
-    z-index: 99900;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
  }
  .toast-dialog-message{
      position: relative;
@@ -104,48 +106,152 @@
      background-size: contain;
  }
 
- /***短信验证码的消息提示框***/
-.verify-dialog-container{
-    z-index: 999;
+
+/**
+ * 加载的样式
+ **/
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url($loadingFont1);
+  src: url($loadingFont2) format('embedded-opentype'), 
+        url($loadingFont3) format('woff2'), 
+        url($loadingFont4) format('woff');
+        // url($loadingFont5) format('truetype');
+        // url($loadingFont6) format('svg');
 }
 
-.verify-phone-wrapper{
-    text-align: left;
-    width: 100%;
-    height: calc-rem(50);
-    background: $whiteColor;
-    color: $labelColor;
-    font-size: calc-rem(26);
-    line-height: calc-rem(50);
-    padding-left: calc-rem(120);
-    margin-top: calc-rem(46);
+.btn-loading{
+    background-color: #f0ad4e;
+    border-radius: 0em;
+    color: #fff;
+    outline: none;
+    padding: calc-rem(20) calc-rem(32);
+    font-size: calc-rem(36);
+    line-height: calc-rem(3);
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid #eea236;
+    pointer-events: none;
+    cursor: not-allowed;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
 }
-.verify-phone-wrapper:before{
-    position: absolute;
-    left: calc-rem(40);
-    color: $labelColor;
-    content: attr(data-hint);
-    font-size: calc-rem(30);
-}
-.common-input.verify-dialog-code{
-    padding: 0;
-    text-align: left;
-}
-.common-input.verify-dialog-code input{
-    width: 43%;
-    border: 0;
-    font-size: calc-rem(26);
-    margin-left: calc-rem(34);
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/*******验证码组件的通用样式*********/
-
-
-.verify-code{
-    color: $tipColor;
-    font-size: calc-rem(28);
+.glyphicon-refresh:before {
+  content: "\e031";
 }
+.glyphicon-remove:before {
+  content: "\e014";
+}
+.glyphicon-refresh-animate {
+  -webkit-animation: spin .7s infinite linear;
+  -khtml-animation: spin .7s infinite linear;
+  -moz-animation: spin .7s infinite linear;
+  -ms-animation: spin .7s infinite linear;
+  -o-animation: spin .7s infinite linear;
+  animation: spin .7s infinite linear; }
 
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    -khtml-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
 
+@-moz-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    -khtml-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
 
+@-ms-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    -khtml-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
 
+@-o-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    -khtml-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    -khtml-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+    -khtml-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }

@@ -70,8 +70,12 @@ var common = {
                 loaders: ['babel-loader']
             },
             {
-                test  : /\.(png|jpg|jpeg|ico|gif|woff|woff2|ttf|eot|svg)$/,
+                test: /\.(png|jpg|jpeg|ico|gif)$/,
                 loader: 'url-loader?limit=8192&name=[path][name].[ext]'
+            },
+            {
+                test: /\.(woff|woff2|ttf|eot|svg)$/,  //由于路径始终不对，所以40kb之内的直接打包
+                loader: 'url-loader?limit=40960&name=[path][name].[ext]'
             }
         ],
     },

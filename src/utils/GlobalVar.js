@@ -11,6 +11,7 @@ import APIPath from "../config/APIPath";
 import RoutPath from "../config/RoutPath";
 import navigate from '../router/navigate';
 import ErrorMessage from "../constants/ErrorMessage";
+import DialogConstants from "../constants/DialogConstants";
 import WebAPIUtils from "./WebAPIUtils";
 import AppModal from "../components/modal";
 // import CSSAnimate from "./CSSAnimate";
@@ -37,6 +38,11 @@ Object.defineProperties((window || global), {
     ErrorMessage: {
         get() {
             return ErrorMessage;
+        }
+    },
+    DialogConstants: {
+        get() {
+            return DialogConstants;
         }
     },
     WebAPIUtils: {

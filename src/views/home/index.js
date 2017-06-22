@@ -10,20 +10,23 @@
 // require core module
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 //require submodule
 import Page from '../../components/page';
+import Header from '../../components/header';
+import Footer from '../../components/footer';
 // import PullToRefresh from '../../components/ui/PullToRefresh';
 import NoRecord from '../../components/noRecord';
 import IsLoading from '../../components/isLoading';
 import NoMore from '../../components/noMore';
 
 import ApplicationItem from '../../components/ApplicationItem';
-import Dialog from '../../components/ui/Dialog';
-import { FIRST, SECOND, THREE } from '../../constants';
+import { ZERO, FIRST, SECOND, THREE } from '../../constants';
+import { fetchData, refreshData } from './reducer/action';
 
 import "./index.scss";
-const ItemCount = 20;
 const DefaultTag = 'ALL';
 class Home extends React.Component {
     /**
@@ -40,9 +43,8 @@ class Home extends React.Component {
         state = state || {};
         return Object.assign(state, {
             tab: DefaultTag,   //默认选中的标签
-            currentPage: 1,  //当前第一页
-            isFinish: false,       //是否加载结束， 没有更多
-            noItem: false     //一条记录都没有
+            footerTab: ZERO,
+            currentPage: 1  //当前第一页
         });
     }
     /**
@@ -56,8 +58,7 @@ class Home extends React.Component {
         var target = e.target;
         var tag = target.getAttribute('data-tag');
         this.setState({
-            tab: tag,
-            isLoading: true
+            tab: tag
         });
         this.loadListByTag(true);
     }
@@ -65,10 +66,10 @@ class Home extends React.Component {
      * 渲染头部
      */
     renderTitleSection() {
-        let len = this.state.tags.length;
+        let len = this.props.tags.length;
         return (
             <ul className="report-list-title report-scroll-hidden">
-                {this.state.tags.map((tag, index) => {
+                {this.props.tags.map((tag, index) => {
                     var _code = tag.code;
                     var _class = this.state.tab == _code ? 'tag-selected' : '';
                     {/*var _count = '';  //tag.quantity  不显示的，强制设置成''*/ }
@@ -107,7 +108,7 @@ class Home extends React.Component {
      */
     renderNoMoreSection() {
         return (
-            this.state.isFinish ? <NoMore /> : null
+            this.props.isFinish ? <NoMore /> : null
         )
     }
     /**
@@ -115,8 +116,20 @@ class Home extends React.Component {
      */
     renderNoRecordSection() {
         return (
-            this.state.noItem ? <NoRecord /> : null
+            this.props.noItem ? <NoRecord /> : null
         )
+    }
+    onFooterTabClickHandler(e, index){
+        e.preventDefault();
+        e.stopPropagation();
+        this.setState({
+            footerTab: index
+        });
+        if(index == ZERO){
+            navigate.push(RoutPath.ROUTER_HOME);
+        }else if (index == FIRST) {
+            navigate.push(RoutPath.ROUTER_LOGIN);
+        }
     }
     /**
      * 渲染界面
@@ -124,11 +137,14 @@ class Home extends React.Component {
     render() {
         return (
             <Page id='application-list-page'>
+                <Header title="首页" isShowBack={false}/>
                 {this.renderTitleSection()}
                 {/*<PullToRefresh loadUp={(resolve) => this.dropdownToRefresh(resolve)}
                     className="report-list-c mdx-scroller" ref='pullToRefresh'>*/}
                 {this.renderListSection()}
                 {/*</PullToRefresh>*/}
+                <Footer tabIndex={this.state.footerTab} onTabClick={(e, index) => this.onFooterTabClickHandler(e, index)} 
+                    icons={[{text: '首页'}, {text: '登录'}]}/>
             </Page>
         );
     }
@@ -146,6 +162,17 @@ class Home extends React.Component {
         //动态设置页面标题
         var title = this.getTitle();
         Base.setTitle(title);
+        /*****
+         * 以下是如何调用全局的对话
+         */
+        // AppModal.toast("这只是第二个测试");
+        //AppModal.toast("这只是一个测试", DialogConstants.TOAST_LONG_DURATION, DialogConstants.TOAST_POSITION_BOTTOM, () => console.log('hahahha'));
+        // AppModal.loading();
+        //AppModal.hide();
+        // AppModal.alert("你好啊啊啊啊啊啊啊啊");
+        // AppModal.alert("你好啊啊啊啊啊啊啊啊", "温馨提示", () => console.log('回调'), '确定');
+        // AppModal.confirm("你好啊啊啊啊啊啊啊啊");
+        // AppModal.confirm("你好啊啊啊啊啊啊啊啊", "你需要退出吗？", () => console.log('成功'), () => console.log('取消'));
         //获取网络初始化数据，
         this.getInitData();
         //上拉加载更多的操作
@@ -157,6 +184,7 @@ class Home extends React.Component {
     getInitData() {
         this.loadTitleData();
         this.loadListByTag();
+
     }
     /**
      * 下拉刷新的具体操作
@@ -211,6 +239,7 @@ class Home extends React.Component {
      * 重置默认值
      */
     resetDefaultState() {
+        this.props.refreshData();
         this.setState({
             currentPage: 1,
         });
@@ -219,8 +248,10 @@ class Home extends React.Component {
      * 点击TAP重新加载数据
      */
     loadListByTag(isReFash = false) {
-        isReFash && this.resetDefaultState();
-        let {itemCount} = this.props;
+        let { itemCount, fetchData } = this.props;
+        if (isReFash) {
+            this.resetDefaultState();
+        }
         setTimeout(() => {   //预防上次设置的 state没执行，做个延迟
             let skip = (this.state.currentPage - 1) * itemCount;
             let param = {
@@ -230,18 +261,10 @@ class Home extends React.Component {
                 pageSize: itemCount,
                 queryDay: this.type
             };
-            this.props.fetchData(1, param);
+            fetchData(1, param);
+            // AppModal.hide();
         }, 0);
 
-    }
-    /**
-     * 设置标题数据
-     * @param {标题TAG数据集合} data 
-     */
-    setTagsData(data) {
-        if (data.length > 0) {
-            this.setState({ tags: data, tab: data[0].code });
-        }
     }
     /**
      * 加载头部TAG数据
@@ -249,38 +272,6 @@ class Home extends React.Component {
     loadTitleData() {
         //需要加载头部的API
         this.props.fetchData(0);
-    }
-    /**
-     * 网络请求数据
-     * @param {请求数据的链接地址} url 
-     * @param {请求成功回调函数} cbOk 
-     * @param {请求失败回调} cbErr 
-     */
-    loadData(url, cbOk, cbErr = null) {
-        WebAPIUtils.getRESTfulData({
-            url: url,
-            success: (res) => {
-                if (res.status == 0) {  //成功的情况
-                    if (res && res.data && res.data.length > 0) {
-                        cbOk(res.data);
-                    } else {
-                        cbOk([]);
-                    }
-                } else {
-                    cbOk([]);
-                }
-            },
-            error: (error) => {
-                console.log(error);
-                cbErr && cbErr(error);
-            }
-        });
-    }
-    /**
-     * 对话框取消事件
-     */
-    cancelDialogHandler() {
-        this.setState({ isShowDialog: false });
     }
 
 }
@@ -295,7 +286,7 @@ let mapStateToProps = state => {
 }
 
 let mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ fetchData,  refreshData}, dispatch)
+    return bindActionCreators({ fetchData, refreshData }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

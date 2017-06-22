@@ -1,12 +1,12 @@
-/**
- * create by zhao at 2017/5/25
+/** 
+ * @component action.js
+ * @description action  具体操作
+ * @time 2017-6-21 17:30
+ * @author fishYu
  */
-import { hashHistory } from 'react-router'
-import MD5 from 'MD5'
 
-import * as utils from '../../../utils'
-import * as ActionType from './actionType'
-import * as RouterConst from '../../../static/const/routerConst'
+'use strict';
+import * as ActionType from './actionType';
 
 const receiveData = data => ({
     type: ActionType.UPDATE_USER_LOGIN,
@@ -25,7 +25,7 @@ export const userLogin = (userName, password) => dispatch => {
         password: password
     }
 
-    dispatch(utils.sendMsg(url, opt, "GET")).then(data => {
+    dispatch(WebAPIUtils.sendRequest(url, opt, "GET")).then(data => {
         dispatch({
             type: ActionType.INIT_USER_LOGIN,
             data: data

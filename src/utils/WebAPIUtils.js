@@ -17,8 +17,8 @@ var WebAPIUtils = {
      */
     toExcString: function (obj, type = { ":": "=", ",": "&" }) {
         let result = "";
-        for (let temp in array) {
-            result += temp + '=' + array[temp] + "&"
+        for (let temp in obj) {
+            result += temp + '=' + obj[temp] + "&"
         }
         return result.substring(-1, result.length - 1);
     },
@@ -30,8 +30,9 @@ var WebAPIUtils = {
      * @param headers 头部额外配置
      * @param dataType 成功返回数据的格式dataType= "json"或dataType= "text"等ajax支持的格式
      */
-    fetchRemoteData: function (url, param, type = "GET", headers = {}, dataType = "json") {
+    fetchUtils: function (url, param, type = "GET", headers = {}, dataType = "json") {
         //TODO  只是JSON 对象的时候
+        let _url = DomainPath == 'devDomain' ? "./mock" + url + ".json" : url;
         if (type.toLocaleUpperCase() === "GET" && Base.isJsonObject(param) && Base.size(param) > 0) {
             url += "?" + WebAPIUtils.toExcString(param)
         }
@@ -41,7 +42,6 @@ var WebAPIUtils = {
             'Content-Type': 'application/json',
             "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS"
         })
-        let _url = DomainPath == 'devDomain' ? "./mock" + url + ".json" : _url;
         //TODO 可能需要在前面增加域名  Config.api
         return fetch(_url, {
             method: type.toLocaleUpperCase(),
@@ -49,19 +49,42 @@ var WebAPIUtils = {
             credentials: 'same-origin',
             body: type.toLocaleUpperCase() === "GET" ? undefined : (dataType == "json" ? JSON.stringify(param) : param)
         })
-            .then((res) => {
-                if (dataType == "json") {
-                    return res.json();
-                } else {
-                    return res.text();
-                }
+            .then((res) => dataType == "json" ? res.json() : res.text())
+            .then((data) => data)
+            .catch((error) => error)
+    },
+    /**
+     * 获取和提交RESTful数据接口
+     * @param url 接口地址
+     * @param param  传输数据 如果contentType = "application/json"，data可以用Object或json string,其他类型data只能为string
+     * @param type  取数据type = "GET"，提交数据type = "POST"
+     * @param headers 头部额外配置
+     * @param dataType 成功返回数据的格式dataType= "json"或dataType= "text"等ajax支持的格式
+     */
+    fetchRemoteData: function (url, param, type, headers, dataType) {
+        return (dispatch, getState) => {
+            //TODO  只是JSON 对象的时候
+            let _url = DomainPath == 'devDomain' ? "./mock" + url + ".json" : url;
+            if (type.toLocaleUpperCase() === "GET" && Base.isJsonObject(param) && Base.size(param) > 0) {
+                url += "?" + WebAPIUtils.toExcString(param)
+            }
+
+            headers = Object.assign({}, {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS"
             })
-            .then((data) => {
-                return data;
+            //TODO 可能需要在前面增加域名  Config.api
+            return fetch(_url, {
+                method: type.toLocaleUpperCase(),
+                headers: headers,
+                credentials: 'same-origin',
+                body: type.toLocaleUpperCase() === "GET" ? undefined : (dataType == "json" ? JSON.stringify(param) : param)
             })
-            .catch((error) => {
-                return error;
-            });
+                .then((res) => dataType == "json" ? res.json() : res.text())
+                .then((data) => data)
+                .catch((error) => error)
+        }
     },
     /**
      * 获取和提交RESTful数据接口
@@ -75,17 +98,16 @@ var WebAPIUtils = {
 
         return (dispatch, getState) => {
             return new Promise(function (resolve, reject) {
-                dispatch(WebAPIUtils.fetchRemoteData(url, param, type, headers, repType))
+                dispatch(WebAPIUtils.fetchRemoteData(url, param, type, headers, dataType))
                     .then(result => {
-                        if (data.status === 0) {
+                        if (result.status === 0) {
                             resolve && resolve(result.data);
                         } else {
                             //查询失败的时候返回错误
-                            resolve && resolve(null);
+                            reject && reject(result.data);
                         }
                     })
-                    .catch(error => {
-                        //系统异常的情况下
+                    .catch((error) => {
                         reject && reject(error);
                     })
             })

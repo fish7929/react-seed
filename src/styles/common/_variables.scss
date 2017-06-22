@@ -10,6 +10,8 @@ $factor: 320/375;  /*屏幕和设计稿的比例（750尺寸）*/
 $headerHeight: 86;  /*顶部的高度*/
 // $topHeight: 126;  /*有头部的高度*/
 $topHeight: 0;
+// $timebarHeight: 40;
+$timebarHeight: 0;
 $lighter: 300;  /***表示font-weight*/
 $normal: 400;  /***表示font-weight*/
 $bold: 700;  /***表示font-weight*/
@@ -28,49 +30,24 @@ $opacityColor: rgba(20,20,20,.48);  /**带透明度颜色*/
 $bankColor: #FF4C18;  /**银行提示颜色**/
 $phoneColor: #b8c9cf;  /**电话颜色*/
 $borderRadius: 13; /*全局圆角大小*/
+$commonBorder: 1px solid $greyColor;
 /**各种图片资源***/
 $notFoundIcon : '../../assets/images/not-found.png'; /*打烊图片*/
-$nextIcon: '../../assets/images/next.png';
-$backIcon: '../../assets/images/back.png';
-$infoIcon: '../../assets/images/info.png';
-$uncheckIcon: '../../assets/images/uncheck.png';
-$checkIcon: '../../assets/images/check.png';
-$volumeIcon: '../../assets/images/volume.png';
-$aboutIcon: '../../assets/images/about.png';
-$contactIcon: '../../assets/images/contact.png';
+$applyTimeIcon: '../../assets/images/apply-time.png';
+$borrowMoneyIcon: '../../assets/images/borrow-money.png';
+$borrowTimeIcon: '../../assets/images/borrow-time.png';
+/*在组件内加载的时候*/
+$loadingFont1 : '../../../assets/fonts/glyphicons-halflings-regular.eot';
+$loadingFont2 : '../../../assets/fonts/glyphicons-halflings-regular.eot?#iefix';
+$loadingFont3 : '../../../assets/fonts/glyphicons-halflings-regular.woff2';
+$loadingFont4 : '../../../assets/fonts/glyphicons-halflings-regular.woff';
+$noItemIcon: '../../../assets/images/no_item.png';
+$backIcon: '../../../assets/images/back.png';
+$deleteIcon: '../../../assets/images/delete.png';
 
-$cashIcon: '../../assets/images/cash.png';
-$cashSelectedIcon: '../../assets/images/cash-selected.png';
-$mineIcon: '../../assets/images/mine.png';
-$mineSelectedIcon: '../../assets/images/mine-selected.png';
-$repaymentIcon: '../../assets/images/repayment.png';
+$phoneIcon: '../../../assets/images/phone.png';
+$passwordIcon: '../../../assets/images/password.png';
+$weixinIcon: '../../../assets/images/weixin.png';
 
-$userIcon: '../../assets/images/user.png';
-$versionIcon: '../../assets/images/version.png';
 
-$plusIcon: '../../assets/images/plus.png';  /*加号*/
-$minusIcon: '../../assets/images/minus.png';  /*减号*/
-$plusDisabledIcon: '../../assets/images/plus-disabled.png';  /*加号*/
-$minusDisabledIcon: '../../assets/images/minus-disabled.png';  /*减号*/
-
-$timeIcon: '../../assets/images/time.png';
-$bankIcon: '../../assets/images/bank.png';
-
-$closeIcon: '../../assets/images/close.png';
-$delIcon: '../../../assets/images/delete.png';  /*直接导入的时候路径需要再次添加一级*/
-$close1Icon: '../../../assets/images/close1.png';  /*直接导入的时候路径需要再次添加一级*/
-$commonBorder: 1px solid $greyColor;
-
-$activeFgColor: #8f2405;
-$activeBgColor:#ffda00;
-$borderColor: #c2c2c2;
-$ignoreColor: #f0f0f0;
-$lessImportantColor: #b5b5b5;
-$errorColor: #e62418;
-$highlightColor: #ff994d;
-$placeholderColor: #ebebeb;
-$redColor: #fd0500;
-$activeFgColorDarker: #6e2406;
-$activeBgColorDarker: #ebc900;
-$helpColor: #c0c0c0;
 

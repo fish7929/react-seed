@@ -29,224 +29,49 @@
     height: -webkit-calc(100% - #{calc-rem($topHeight)});
     height: calc(100% - #{calc-rem($topHeight)});
 }
-/*通用按钮*/
-.common-button{
-    font-size: calc-rem(34);
-    border-radius: calc-rem(42);
-    margin: 0 auto;
-    text-align: center;  
-    width: calc-rem(590);
-    height: calc-rem(84);
-    line-height: calc-rem(84);
-    background: $btnColor;
-    color: #fff1bc;
-    letter-spacing: 0.4px;
+.btn-active:active{
+    opacity: .8;
 }
-
-.common-button-active{
-    background: $yellowColor;
-    color: $whiteColor;
-    -webkit-box-shadow: 0 1px 10px #FFB800;
-    box-shadow: 0 1px 10px #FFB800;
-    -webkit-text-shadow: 0 1px 1px #F2C000;
-    text-shadow: 0 1px 1px #F2C000;
-}
-
-.common-button-opacity{
-    border: 1px solid #ffca00;
-    background: transparent;
-    color: #ffb100;
-}
-/*通用输入框*/
-.input-wrapper{
-     width: 100%;
-     background: $whiteColor;
-     box-sizing: border-box;
- }
-.common-input{
-    width: 100%;
-    height: calc-rem(110);
-    padding: 0 calc-rem(40);
-    font-size: calc-rem(30);
-    line-height: calc-rem(110);
-    color: $labelColor;
-}
-.common-input input{
-    display: inline-block;
-    width: 50%;
-    margin-left: calc-rem(70);
-    background: transparent;
-    outline: none;
-    font-size: calc-rem(28);
-    line-height: calc-rem(70);
-    height: 100%;
-    color: $labelColor;
-    border: 0;
-    font-weight: $lighter;
-}
-.common-input .disabled-phone{
-    display: inline-block;
-    width: 50%;
-    height: 100%;
-    margin-left: calc-rem(70);
-    font-size: calc-rem(30);
-    font-weight: $normal;
-    color: $labelColor;
-}
-.common-input:first-child{
-    border-bottom: $commonBorder;
- }
-
-
-/**通用提示*/
-
-.common-hint{
-    width: 100%;
-    height: calc-rem(42);
-    padding-left: calc-rem(40);
-    color: $hintColor;
-    line-height: calc-rem(42);
-    margin-top: calc-rem(10);
-    margin-bottom: calc-rem(10);
-    // margin-top: calc-rem(20);
-    // margin-bottom: calc-rem(20);
-    font-size: calc-rem(22);
-}
-
-.common-hint.agreement-hint{
-    padding: 0;
-    margin-top: calc-rem(30);
-}
-
-/**通用条目带文字和logo的**/
 .common-item{
     position: relative;
-    width: 100%;
-    padding: 0 calc-rem(40);
-    height: calc-rem(110);
-    font-size: calc-rem(30);
-    color: $labelColor;
-    background-color: $whiteColor;
-    line-height: calc-rem(110);
-    text-align: right;
+    color: #333;
+    font-size: calc-rem(24);
+    margin-bottom: calc-rem(30);
+    // padding-left: calc-rem(210);
 }
-
-
-
-.next-logo{
-    background-image: url($nextIcon);
-    background-position: 94.5% center;
-    background-repeat: no-repeat;
-    background-size: calc-rem(16) calc-rem(30);
-    padding-right: calc-rem(70);
-}
-
-.pseudo-item:before{
-    position: absolute;
-    left: calc-rem(40);
-    color: $labelColor;
+.common-item:before{
+    position: relative;
+    margin-left: calc-rem(40);
+    color: #999;
     content: attr(data-hint);
-    font-size: calc-rem(30);
-    font-weight: $normal;
+    margin-right:calc-rem(30);
 }
-/***logo集合**/
-.time-item-logo, .bank-item-logo, .repayment-item-logo{
-    font-size: calc-rem(26);
+.borrow-money-item:after{
+    position: absolute;
+    left: 0;
+    width: calc-rem(24);
+    height: 100%;
+    content: '';
+    background: url($borrowMoneyIcon) 0 center no-repeat;
+    background-size: calc-rem(24);
 }
-.time-item-logo:before{
-    padding-left: calc-rem(62);
-    background: url($timeIcon) 0 center no-repeat;
-    background-size: calc-rem(36) calc-rem(36);
+.borrow-time-item:after{
+    position: absolute;
+    left: 0;
+    width: calc-rem(24);
+    height: 100%;
+    content: '';
+    background: url($borrowTimeIcon) 0 center no-repeat;
+    background-size: calc-rem(24);
 }
-
-.bank-item-logo:before{
-    padding-left: calc-rem(66);
-    background: url($bankIcon) 0 center no-repeat;
-    background-size: calc-rem(40) calc-rem(28);
+.report-time-item:after{
+    position: absolute;
+    left: 0;
+    width: calc-rem(24);
+    height: 100%;
+    content: '';
+    background: url($applyTimeIcon) 0 center no-repeat;
+    background-size: calc-rem(24);
 }
-
-.repayment-item-logo:before{
-    padding-left: calc-rem(76);
-    background: url($repaymentIcon) 0 center no-repeat;
-    background-size: calc-rem(42) calc-rem(38);
-}
-
-.user-item-logo:before{
-    padding-left: calc-rem(76);
-    background: url($userIcon) 0 center no-repeat;
-    background-size: calc-rem(42) calc-rem(44);
-}
-
-.about-item-logo:before{
-    padding-left: calc-rem(76);
-    background: url($aboutIcon) 0 center no-repeat;
-    background-size: calc-rem(44) calc-rem(40);
-}
-
-.contact-item-logo:before{
-    padding-left: calc-rem(76);
-    background: url($contactIcon) 0 center no-repeat;
-    background-size: calc-rem(40) calc-rem(42);
-}
-
-.version-item-logo:before{
-    padding-left: calc-rem(76);
-    background: url($versionIcon) 0 center no-repeat;
-    background-size: calc-rem(42) calc-rem(40);
-}
-/*通用的下拉选择**/
-.common-select{
-     width: 100%;
-     height: 100%;
-     padding-left: 77%;   /*85% 显示全*/ 
-     background-image: url($nextIcon);
-     background-position: 100% center;
-     background-repeat: no-repeat;
-     background-size: calc-rem(16) calc-rem(30);
-     background-color: transparent; 
-     color: $labelColor;
-     border: 0;
-     outline: none;
-     -webkit-appearance: none;
-     appearance: none;
- }
-
- .has-bottom-border{
-     border-bottom: $commonBorder;
- }
-.margin-bottom-54{
-    margin-bottom: calc-rem(54);
-}
-.margin-top-0{
-    margin-top: 0 !important;
- }
-.margin-top-20{
-    margin-top: calc-rem(20) !important;
- }
-
- .margin-top-90{
-    margin-top: calc-rem(90) !important;
- }
-
- .error-msg{
-     color: $bankColor;
-     font-size: calc-rem(20);
-     line-height: calc-rem(50);
-     padding-left: calc-rem(40);
-     background-color: #FAE7E6;
- }
-
- .error-msg:before{
-    display: inline-block;
-    content: 'i';
-    width: calc-rem(28);
-    height: calc-rem(28);
-    border-radius: 100%;
-    background: $bankColor;
-    text-align: center;
-    line-height: calc-rem(28);
-    margin-right: calc-rem(20); 
-    color: #fff;
- }
 
  

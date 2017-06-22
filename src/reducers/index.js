@@ -6,5 +6,6 @@
  */
 
 'use strict';
-// import count from './count';
-// export {count};
+import homeData from '../views/home/reducer';
+import loginData from '../views/login/reducer';
+export {homeData, loginData};

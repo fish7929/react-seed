@@ -9,7 +9,8 @@
 
 const APIPath = {
     //home api 
-    GetHomeData: '/home/list',
+    GetHomeListData: '/home/list',
+    GetHomeTagsData: '/home/tags',
     GetHomeDataById: (id) => '/home/list/' + id,
 };
 

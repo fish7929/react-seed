@@ -49,6 +49,8 @@ let navigate = {
                     path = location.pathname;
                 this.push(path, { type: type });
             }
+        }else{  //最后一层的时候
+            this.push(RoutPath.ROUTER_HOME, { type: 'back' });
         }
 
         return {
@@ -58,7 +60,7 @@ let navigate = {
 };
 
 let listenerFn = (location) => {
-    if (histories == 0 || location.pathname != histories[histories.length - 1].pathname) {
+    if (histories.length == 0 || location.pathname != histories[histories.length - 1].pathname) {
         histories.push(location);
     }
 }

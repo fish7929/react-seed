@@ -4,18 +4,18 @@
  * @time 2017-03-30 14:50
  * @author fishYu
  **/
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import PageCSSTransitionChild from './PageCSSTransitionChild';
 import ReactTransitionGroup from 'react/lib/ReactTransitionGroup';
 
-const PageCSSTransition = React.createClass({
-    
-    propTypes: {
-        transitionName: React.PropTypes.string.isRequired
-    },
+class PageCSSTransition extends React.Component {
+    constructor(props) {
+        super(props);
+        this._wrapChild = this._wrapChild.bind(this);
+    }
 
-    _wrapChild(child){
+    _wrapChild(child) {
         return (
             <PageCSSTransitionChild
                 transitionName={this.props.transitionName}
@@ -24,13 +24,15 @@ const PageCSSTransition = React.createClass({
                 {child}
             </PageCSSTransitionChild>
         );
-    },
+    }
 
-    render(){
+    render() {
         return (
             <ReactTransitionGroup {...this.props} childFactory={this._wrapChild} />
         );
     }
-});
-
-export default PageCSSTransition
+}
+PageCSSTransition.propTypes = {
+    transitionName: PropTypes.string.isRequired
+};
+export default PageCSSTransition;
