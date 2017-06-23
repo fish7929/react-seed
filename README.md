@@ -9,10 +9,23 @@ REACT种子项目
 >
 ### assets : 项目的资源文件
 * images ：图片文件
+* fonts ：字体文件
+>
+### mock : 测试json文件 
+>
+
 >
 
 ### src : 是前端源代码根目录
 * components ：react 组件源码
+* config ： 数据请求api配置
+* constants ： 常量配置
+* lib ： 类库
+* reducers: redux总入库
+* router ： 路由配置入口
+* styles ： 样式
+* utils ： 辅助类工具
+* views ： 页面容器
 * index.jsx ：主入口
 >
 ### dist : 压缩，合并后的代码，发布到生产环境中的代码；运行 npm run build 命令会自动生成，无需手动更改此文件夹。
