@@ -16,6 +16,8 @@ import App from '../views/App';
  * 以下做动态加载，每个页面所需要的JS
  */
 let Home = (location, cb) => {
+    //开始加载
+    AppModal.loading();
     require.ensure([], require => {
         cb(null, require('../views/home').default);
     }, 'home');

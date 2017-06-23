@@ -22,7 +22,7 @@ import NoRecord from '../../components/noRecord';
 import IsLoading from '../../components/isLoading';
 import NoMore from '../../components/noMore';
 
-import ApplicationItem from '../../components/ApplicationItem';
+import ApplicationItem from './ApplicationItem';
 import { ZERO, FIRST, SECOND, THREE } from '../../constants';
 import { fetchData, refreshData } from './reducer/action';
 
@@ -136,7 +136,7 @@ class Home extends React.Component {
      */
     render() {
         return (
-            <Page id='application-list-page'>
+            <Page id='application-list-page' ref="home">
                 <Header title="首页" isShowBack={false}/>
                 {this.renderTitleSection()}
                 {/*<PullToRefresh loadUp={(resolve) => this.dropdownToRefresh(resolve)}
@@ -177,6 +177,18 @@ class Home extends React.Component {
         this.getInitData();
         //上拉加载更多的操作
         this.pullToLoading();
+        if (!this.props.isFetching) {
+            AppModal.hide();
+        }
+    }
+    /**
+     * 属性改变的时候触发
+     * @param {object} nextProps props
+     */
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.isFetching) {
+            AppModal.hide();
+        }
     }
     /**
      * 获取网络初始化数据，

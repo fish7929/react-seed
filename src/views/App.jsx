@@ -6,17 +6,20 @@
 import React from 'react';
 import PageCSSTransition from '../components/animate/PageCSSTransition';
 
-const App = React.createClass({
+class App extends React.Component {
     componentWillEnter(callback){
         console.log("onEnter");
-    },
+    }
 
     componentWillMount(){
-    },
+    }
 
     componentWillUpdate(){
-    },
-    
+    }
+    componentDidMount() {
+    }
+    componentWillReceiveProps(nextProps) {
+    }
     render(){
         return (
             <PageCSSTransition transitionName="cover">
@@ -24,6 +27,6 @@ const App = React.createClass({
             </PageCSSTransition>
         );
     }
-})
+}
 
 export default App
