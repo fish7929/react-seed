@@ -19,13 +19,34 @@ REACT种子项目
 ### src : 是前端源代码根目录
 * components ：react 组件源码
 * config ： 数据请求api配置
+* * APIPath.js: rest API 路径
+* * RoutPath.js: 路由配置常量
 * constants ： 常量配置
+* * DialogConstants.js: toast对话框的一些常量信息
+* * ErrorMessage.js: 通用的一些错误信息配置
 * lib ： 类库
 * reducers: redux总入库
 * router ： 路由配置入口
+* * navigate.js: 路由跳转辅助类
+* * Router.js: 路由配置
 * styles ： 样式
+* * common: 通用的样式文件夹
+* * _mixins.scss: 通用的sass的mixin
+* * _variables.scss: 定义一些全局的变量，如：img路径， color 等
+* * reset.scss: 重置的一些全局样式
+* * common.scss: 项目中通用样式
 * utils ： 辅助类工具
+* * Base.js: 通用的工具函数
+* * GlobalVar.js: 定义全局变量
+* * WebAPIUtils.js: web请求的具体发送请求入口
 * views ： 页面容器
+* * module: 模块文件名， 如homeindex
+* * reducer: reducer 文件夹
+> * * action.js: redux事件派发
+> * * actionType.js: redux事件名称
+> * * index.js: redux事件处理
+* * index.js: 模块入口
+* * index.scss: 模块样式
 * index.jsx ：主入口
 >
 ### dist : 压缩，合并后的代码，发布到生产环境中的代码；运行 npm run build 命令会自动生成，无需手动更改此文件夹。

@@ -13,6 +13,8 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import Loading from './ui/Loading';
 import Toast from './ui/Toast';
 import Dialog from './ui/Dialog';
+import Countdown from './ui/Countdown';
+import ActionSheet from './ui/ActionSheet';
 import './index.scss';
 class AppModal {
     static isShow = false;
@@ -72,6 +74,28 @@ class AppModal {
             text: okBtn
         }];
         let component = <Dialog text={text} title={title} buttons={buttons} />;
+        AppModal.modalRender(component);
+    }
+    /**
+     * toast 倒计时
+     * @param {number} showTime 倒计时的时间 
+     * @param {function} callBack 回调函数
+     * @param {string} imgPath 图片路径
+     * @param {string} position 显示的位置 常量 TOAST_POSITION_TOP TOAST_POSITION_CENTER  TOAST_POSITION_BOTTOM
+     */
+    static countdown(showTime, callBack, imgPath = '', position = DialogConstants.TOAST_POSITION_CENTER) {
+        let component = <Countdown showTime={showTime} callBack={callBack}
+            imgPath={imgPath} position={position} />;
+        AppModal.modalRender(component);
+    }
+
+    /**
+     * action sheet 动作表单
+     * @param {array} sheets 表单提示数组
+     * @param {function} action 表单点击回调函数
+     */
+    static actionSheet(sheets, action) {
+        let component = <ActionSheet sheets={sheets} action={action}/>;
         AppModal.modalRender(component);
     }
     /**
