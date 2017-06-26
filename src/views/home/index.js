@@ -140,7 +140,7 @@ class Home extends React.Component {
                 <Header title="首页" isShowBack={false}/>
                 {this.renderTitleSection()}
                 {/*<PullToRefresh loadUp={(resolve) => this.dropdownToRefresh(resolve)}
-                    className="report-list-c mdx-scroller" ref='pullToRefresh'>*/}
+                    className="report-list-c " ref='pullToRefresh'>*/}
                 {this.renderListSection()}
                 {/*</PullToRefresh>*/}
                 <Footer tabIndex={this.state.footerTab} onTabClick={(e, index) => this.onFooterTabClickHandler(e, index)} 
