@@ -25,7 +25,7 @@ import NoMore from '../../components/noMore';
 import ApplicationItem from './ApplicationItem';
 import { ZERO, FIRST, SECOND, THREE } from '../../constants';
 import { fetchData, refreshData } from './reducer/action';
-
+import MonthRange from '../../components/monthRange';
 import "./index.scss";
 const DefaultTag = 'ALL';
 class Home extends React.Component {
@@ -44,7 +44,8 @@ class Home extends React.Component {
         return Object.assign(state, {
             tab: DefaultTag,   //默认选中的标签
             footerTab: ZERO,
-            currentPage: 1  //当前第一页
+            currentPage: 1,  //当前第一页
+            isShow: true
         });
     }
     /**
@@ -119,32 +120,61 @@ class Home extends React.Component {
             this.props.noItem ? <NoRecord /> : null
         )
     }
-    onFooterTabClickHandler(e, index){
+    onFooterTabClickHandler(e, index) {
         e.preventDefault();
         e.stopPropagation();
         this.setState({
             footerTab: index
         });
-        if(index == ZERO){
+        if (index == ZERO) {
             navigate.push(RoutPath.ROUTER_HOME);
-        }else if (index == FIRST) {
+        } else if (index == FIRST) {
             navigate.push(RoutPath.ROUTER_LOGIN);
         }
+    }
+    handleChangeAddress(address) {
+        console.log(address, 999999);
+    }
+
+    closeAddressPicker(address) {
+        console.log(address, 88888);
+        if(address[0].year <= address[1].year && address[0].month <= address[1].month){
+            this.setState({
+                isShow: false,
+            });
+        }else{
+            AppModal.toast('选择筛选月份不符合');
+        }
+        
+    }
+
+    cancelAddressPicker() {
+        console.log(77777);
     }
     /**
      * 渲染界面
      */
     render() {
+        let _date = new Date();
+        let _year = _date.getFullYear();
+        let _month = _date.getMonth() + 1;
         return (
             <Page id='application-list-page' ref="home">
-                <Header title="首页" isShowBack={false}/>
+                <MonthRange
+                    range={{ min: { year: (_year - 1), month: _month }, max: { year: _year, month: _month } }}
+                    onCancel={this.cancelAddressPicker.bind(this)}
+                    onConfirm={this.closeAddressPicker.bind(this)}
+                    visible={this.state.isShow}
+                    onChange={this.handleChangeAddress.bind(this)}>
+                </MonthRange>
+                <Header title="首页" isShowBack={false} />
                 {this.renderTitleSection()}
                 {/*<PullToRefresh loadUp={(resolve) => this.dropdownToRefresh(resolve)}
                     className="report-list-c " ref='pullToRefresh'>*/}
                 {this.renderListSection()}
                 {/*</PullToRefresh>*/}
-                <Footer tabIndex={this.state.footerTab} onTabClick={(e, index) => this.onFooterTabClickHandler(e, index)} 
-                    icons={[{text: '首页'}, {text: '登录'}]}/>
+                <Footer tabIndex={this.state.footerTab} onTabClick={(e, index) => this.onFooterTabClickHandler(e, index)}
+                    icons={[{ text: '首页' }, { text: '登录' }]} />
             </Page>
         );
     }
