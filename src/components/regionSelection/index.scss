@@ -1,0 +1,152 @@
+/** 
+ * @component index.scss
+ * @description 通用地区选择组件
+ * @time 2017-6-27 17:30
+ * @author fishYu
+ */
+
+.region-selection-container{
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.45);
+}
+.region-selection-mask{
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.region-selection-wrapper{
+    position: absolute;
+    width: 100%;
+    background-color: #fff; 
+    height: 806px;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+}
+.region-selection-title{
+    position: relative;
+    width: 100%;
+    height: 180px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(239, 239,239, .7);
+    .title-hint{
+        width: 100%;
+        height: 95px;
+        line-height: 95px;
+        text-align: center;
+        font-size: 36px;
+        color: #333333;
+        position: relative;
+        span{
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: inline-block;
+            height: 100%;
+            width: 72px;
+            background: url('./files/close.png') center no-repeat;
+            background-size: 44px; 
+        }
+    }
+    .region-selected-wrapper{
+        width: 100%;
+        height: 85px;
+        line-height: 85px;
+        box-sizing: border-box;
+        padding: 0 32px;
+        overflow-x: auto;
+        white-space: nowrap;
+        span{
+            display: inline-block;
+            color: #333333;;
+            font-size: 28px;
+            margin-right: 127px;
+            box-sizing: border-box;
+        }
+        .no-region{
+            color: #ffa700;
+        }
+        .region-tab-slected{
+            position: relative;
+            &:after{
+                position: absolute;
+                bottom: 0;
+                content: '';
+                display: block;
+                height: 4px;
+                background: #ffa700;
+                width: 100%;
+            }
+        }
+    }
+}
+.region-selection-content{
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 626px;
+    padding: 0;
+    margin: 0;
+    transition-duration: 200ms;
+    white-space: nowrap;
+}
+.region-item-section{
+    height: auto;
+    padding: 0 32px; 
+    // display: table-cell;
+    display: inline-block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 626px;
+    vertical-align: top;
+    li{
+        width: 100%;
+        height: 67px;
+        span{
+            display: inline-block;
+            height: 67px;
+            padding-top: 29px;
+            color: #333;
+            padding-right:  60px; 
+            font-size: 28px;
+            box-sizing: border-box;
+        }
+        .region-item-selected{
+            color: #ffa700;
+            background: url('./files/location-checked.png') right 33px no-repeat;
+            background-size: 32px; 
+        }
+    }
+}
+
+/*******************隐藏滚动条样式****************
+/* 设置滚动条的样式 */
+.region-scroll-hidden::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+/* 滚动槽 */
+.region-scroll-hidden::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 0px rgba(0,0,0,0);
+    box-shadow: inset 0 0 0px rgba(0,0,0,0);
+    border-radius: 0;
+}
+/* 滚动条滑块 */
+.region-scroll-hidden::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: rgba(0,0,0,0);
+    -webkit-box-shadow: inset 0 0 0px rgba(0,0,0,0);
+    box-shadow: inset 0 0 0px rgba(0,0,0,0);
+}
+
+.region-scroll-hidden::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0);
+}
