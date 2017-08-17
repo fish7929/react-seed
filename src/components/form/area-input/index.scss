@@ -1,0 +1,28 @@
+.common-select-location{
+    background: url('./files/next.png') calc(100% - 40px) center no-repeat #ffffff;
+    background-size: 28px;
+    width: 100%;
+    height: 100px;
+    padding-left: 40px;
+    padding-right: 40px;
+    line-height: 100px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 30px;
+    color: #333;
+    position: relative;
+    text-indent: 160px;
+    border-bottom: 1px solid #f6f6f6;
+    &:before{
+        position: absolute;
+        left: -120px;
+        text-align: left;
+        color: #333;
+        content: attr(data-hint);
+    }
+    
+}
+
+.common-location-hint{
+    color: #dadada;
+}

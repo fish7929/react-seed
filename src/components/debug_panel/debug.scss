@@ -1,0 +1,90 @@
+.debug-panel {
+    position: fixed; 
+    position: 1000;
+    color: white;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+
+    h3 {
+        font-size: 24px;
+        width: 100%;
+        text-align: center;
+        color: #dacaca;
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 56px;
+        line-height: 56px;
+
+        a {
+            color:white;
+            display: block;
+            width: 100px;
+            height: 56px;
+            line-height: 56px;
+            text-align: center;
+
+            &:visited{
+                color:white;
+            }
+
+            &.close {
+                float:left;
+            }
+            &.clear {
+                float:right;
+            }
+        }
+    }
+    ul {
+
+        .log {
+            margin:16px;
+            font-size:12px;
+            pre {
+                white-space: pre-wrap;       /* Since CSS 2.1 */
+                white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+                white-space: -pre-wrap;      /* Opera 4-6 */
+                white-space: -o-pre-wrap;    /* Opera 7 */
+                word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            }
+
+            &-debug {
+                color: white;
+            }
+            &-warning {
+                color: yellow;
+            }
+            &-error {
+                color: red;
+            }
+            &-info {
+                color: white;
+            }
+        }    
+    }
+
+    &-hide {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        left: 20px;
+        border-radius: 20px;
+        background: rgba(0, 0, 0, 0.3);
+        overflow:hidden;
+
+        h3 {
+            display: none;
+        }
+    }
+
+    &-show {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+
+        h3 {
+            display: block;
+        }
+    }
+}

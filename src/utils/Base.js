@@ -275,11 +275,35 @@ module.exports = {
         if (!reg.test(number)) return false
         return true
     },
-    
+
     checkPhon(txt) {
         let reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
         if (!reg.test(txt)) return false
 
         return true
+    },
+    /**
+     * 判断两个对象是否是相同对象
+     * @param {object} objA 判断的对象
+     * @param {object} objB 判断的对象
+     */
+    shallowEqual(objA, objB) {
+        if (objA === objB) {
+            return true
+        }
+        const keysA = Object.keys(objA)
+        const keysB = Object.keys(objB)
+        if (keysA.length !== keysB.length) {
+            return false
+        }
+        // 测试A对象的key和B对象的key不一致
+        const hasOwn = Object.prototype.hasOwnProperty
+        for (let i = 0; i < keysA.length; i++) {
+            if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+                return false
+            }
+        }
+        return true
     }
+
 };
